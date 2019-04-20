@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bat 'run' 
+                bat 'start' 
                 archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true (2)
             }
         }
