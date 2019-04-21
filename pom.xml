@@ -16,7 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<start-class>EmployeeManagementApplication</start-class>
+		<start-class>com.employeeManagement.EmployeeManagementApplication</start-class>
 	</properties>
 
 	<dependencies>
