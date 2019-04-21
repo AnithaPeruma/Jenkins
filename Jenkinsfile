@@ -1,31 +1,22 @@
 pipeline {
     agent any
-
     stages {
-
-        // Normal Stages
-
-        stage ('success'){
+        stage('Build') {
             steps {
-                script {
-                    currentBuild.result = 'FAILURE'
-                }
+                sh './gradlew build'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh './gradlew check'
             }
         }
     }
 
     post {
-        failure {
-            script {
-                currentBuild.result = 'FAILURE'
-            }
-        }
-
         always {
-            step([$class: 'Mailer',
-                notifyEveryUnstableBuild: true,
-                recipients: "anitha.perumal@mindtree.com",
-                sendToIndividuals: true])
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
+            junit 'build/reports/**/*.xml'
         }
     }
 }
