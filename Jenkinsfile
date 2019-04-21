@@ -1,22 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage("build") {
             steps {
-                sh './gradlew build'
-            }
-        }
-        stage('Test') {
-            steps {
-                sh './gradlew check'
+                sh 'mvn clean install -Dmaven.test.failure.ignore=true'
             }
         }
     }
-
     post {
         always {
-            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true
-            junit 'build/reports/**/*.xml'
+            archive "target/**/*"
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
