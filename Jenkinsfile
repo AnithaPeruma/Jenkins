@@ -18,7 +18,7 @@ node {
     }
 
     stage('Maven build') {
-        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install'
+        buildInfo = rtMaven.run pom: 'pom.xml', goals: 'clean install spring-boot:repackage'
     }
 
     stage('Publish build info') {
