@@ -1,11 +1,13 @@
 pipeline {
-    agent any
-
     stages {
-        stage('Build') {
+        stage('Initialize') {
             steps {
-                bat 'start' 
-                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true (2)
+                //enable remote triggers
+                script {
+                    properties([pipelineTriggers([pollSCM('')])])
+                }
+                //define scm connection for polling
+                git branch: BRANCH_NAME, credentialsId: 'anithaperuma', url: 'https://github.com/AnithaPeruma/Jenkins.git'
             }
         }
     }
