@@ -1,6 +1,6 @@
 node {
   stage('SCM') {
-    git 'https://github.com/foo/bar.git'
+    git 'https://github.com/AnithaPeruma/Jenkins.git'
   }
   stage('build & SonarQube Scan') {
     withSonarQubeEnv('Sonar') {
