@@ -12,7 +12,7 @@ node {
   }
 }
  
-def notifyStarted() { /* .. */ }
+def notifyStarted() { /* .. */}
  
 def notifySuccessful() { /* .. */ }
  
