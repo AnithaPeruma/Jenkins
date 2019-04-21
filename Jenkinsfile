@@ -1,20 +1,9 @@
-pipeline {
-        agent none
-        stages {
-          stage("build & SonarQube analysis") {
-            agent any
-            steps {
-              withSonarQubeEnv('Sonar') {
-                bat "mvn clean package sonar:sonar"
-              }
-            }
-          }
-          stage("Quality Gate") {
-            steps {
-              timeout(time: 1, unit: 'HOURS') {
-                waitForQualityGate abortPipeline: true
-              }
-            }
-          }
-        }
-      }
+node {
+    stage('SonarQube analysis') {
+    // requires SonarQube Scanner 2.8+
+    def scannerHome = tool 'Sonar';
+    withSonarQubeEnv('Sonar') {
+      bat "${scannerHome}/bin/sonar-runner.bat"
+    }
+  } 
+}
