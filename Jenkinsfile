@@ -1,16 +1,15 @@
 pipeline {
     agent any
+
     stages {
-        stage("build") {
+        stage('Test') {
             steps {
-                sh 'mvn clean install -Dmaven.test.failure.ignore=true'
+                /* `make check` returns non-zero on test failures,
+                * using `true` to allow the Pipeline to continue nonetheless
+                */
+                sh 'make check || true' (1)
+                junit '**/target/*.xml' (2)
             }
-        }
-    }
-    post {
-        always {
-            archive "**/**/*"
-            junit 'test-report.xml'
         }
     }
 }
