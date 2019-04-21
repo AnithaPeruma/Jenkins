@@ -5,7 +5,7 @@ pipeline {
             agent any
             steps {
               withSonarQubeEnv('Sonar') {
-                bat "clean package sonar:sonar"
+                bat "mvn clean package sonar:sonar"
               }
             }
           }
