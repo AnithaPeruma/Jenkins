@@ -3,7 +3,7 @@ node {
     // requires SonarQube Scanner 2.8+
     def scannerHome = tool 'Sonar';
     withSonarQubeEnv('Sonar') {
-      bat "${scannerHome}/bin/sonar-runner.bat"
+      bat "${scannerHome}/sonar-scanner.bat"
     }
   } 
 }
