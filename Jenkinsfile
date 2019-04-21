@@ -5,7 +5,7 @@ pipeline {
 
         // Normal Stages
 
-        stage ('failure'){
+        stage ('success'){
             steps {
                 script {
                     currentBuild.result = 'FAILURE'
