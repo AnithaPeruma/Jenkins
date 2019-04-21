@@ -13,11 +13,7 @@ pipeline {
             junit 'target/surefire-reports/*.xml'
             
           },
-          "Archive": {
-            archiveArtifacts(artifacts: 'target/Nadia.jar', onlyIfSuccessful: true, fingerprint: true)
-            archiveArtifacts(artifacts: 'target/Nadia*javadoc.jar', fingerprint: true)
-            
-          }
+          
         )
       }
     }
