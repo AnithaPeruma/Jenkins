@@ -11,7 +11,7 @@ pipeline {
 steps{
 
 withSonarQubeEnv('Sonar') {
-sh 'mvn clean install sonar:sonar'
+sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
 
 }
 }
