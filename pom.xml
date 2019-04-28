@@ -65,25 +65,7 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                    <configuration>
-                        <mainClass>employeeManagement</mainClass>
-                    </configuration>
-                </execution>
-            </executions>
-			</plugin>
-			<plugin>
-    <groupId>com.employee</groupId>
-    <artifactId>sonar-maven-plugin</artifactId>
-    <version>3.0.2</version>
-</plugin>
+	
 		</plugins>
 	</build>
 
