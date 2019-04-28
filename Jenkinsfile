@@ -4,7 +4,7 @@ node {
   }
   stage('build & SonarQube Scan') {
     withSonarQubeEnv('Sonar') {
-      sh 'mvn clean install sonar:sonar'
+      sh 'mvn clean package sonar:sonar'
     } // SonarQube taskId is automatically attached to the pipeline context
   }
 }
