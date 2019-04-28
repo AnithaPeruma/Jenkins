@@ -1,12 +1,31 @@
 pipeline {
     agent any
+
     stages {
-        stage ('SCM') {
+
+        // Normal Stages
+
+        stage ('success'){
             steps {
-                git branch: 'master', url: "https://github.com/AnithaPeruma/Jenkins.git"
+                script {
+                    currentBuild.result = 'SUCCESS'
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
             }
         }
 
-       
-}
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: true,
+                recipients: "anitha.perumal@mindtree.com",
+                sendToIndividuals: true])
+        }
+    }
 }
