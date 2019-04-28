@@ -1,31 +1,21 @@
 pipeline {
     agent any
-
     stages {
-
-        // Normal Stages
-
-        stage ('success'){
+        stage('Build') {
             steps {
-                script {
-                    currentBuild.result = 'SUCCESS'
+                sh 'mvn clean install'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+            post {
+                always {
+                    junit '**/*.xml'
                 }
             }
         }
-    }
-
-    post {
-        failure {
-            script {
-                currentBuild.result = 'FAILURE'
-            }
-        }
-
-        always {
-            step([$class: 'Mailer',
-                notifyEveryUnstableBuild: true,
-                recipients: "anitha.perumal@mindtree.com",
-                sendToIndividuals: true])
-        }
+        
     }
 }
