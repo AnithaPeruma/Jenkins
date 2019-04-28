@@ -1,20 +1,12 @@
-node {
-  stage('SCM') {
-    git 'https://github.com/AnithaPeruma/Jenkins.git'
-  }
- stage('Sonarqube') {
-    environment {
-        scannerHome = tool name: 'Sonar', type: 'hudson.plugins.sonar.SonarRunnerInstallation'
-    }
+pipeline {
+    agent any
 
-    steps {
-        withSonarQubeEnv('Sonar') {
-            sh "${scannerHome}/bin/sonar-scanner"
-        }
-
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: true
+    stages {
+        stage('Build') {
+            steps {
+                sh 'make' 
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
+            }
         }
     }
-}
 }
